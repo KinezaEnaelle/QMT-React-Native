@@ -16,10 +16,10 @@ function LoginScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.box}>
-          <View style={styles.title}>
-              <Text style={styles.titleText}>Log in</Text>
-              <Text style={styles.titleText1}>To continue to QMT</Text>
-          </View>
+        <View style={styles.title}>
+          <Text style={styles.titleText}>Log in</Text>
+          <Text style={styles.titleText1}>To continue to QMT</Text>
+        </View>
         <View style={styles.body}>
           <Formik>
             <Fragment>
@@ -47,10 +47,10 @@ function LoginScreen() {
           </TouchableOpacity>
         </View>
         <View style={styles.body1}>
-            <Text>Don’t have an account?</Text>
+          <Text>Don’t have an account?</Text>
         </View>
         <View style={styles.footer}>
-        <TouchableOpacity
+          <TouchableOpacity
             style={styles.buttonStyle2}
             onPress={() =>
               navigation.dispatch(StackActions.replace("RegisterScreen"))
@@ -81,21 +81,21 @@ export const styles = StyleSheet.create({
     backgroundColor: "#668CFF",
     borderRadius: 5,
     width: 250,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonStyle2: {
     padding: 12,
     backgroundColor: "#FF9B00",
     borderRadius: 5,
     width: 250,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   buttonText: {
     color: "white",
-    alignItems: 'center',
-    justifyContent: 'center'
+    alignItems: "center",
+    justifyContent: "center",
   },
   textStyle: {
     color: "pink",
@@ -106,7 +106,7 @@ export const styles = StyleSheet.create({
     backgroundColor: "#E2DFDF",
     width: 290,
     height: 450,
-    borderRadius: 8
+    borderRadius: 8,
   },
   body: {
     padding: 12,
@@ -127,30 +127,39 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    top: 10
+    top: 10,
   },
   header: {
-      top: 70,
+    top: 70,
+    justifyContent: "center",
+    alignItems: "center",
   },
-  body1:{
+  body1: {
     top: 90,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
-  footer:{
-      top: 110,
+  footer: {
+    top: 110,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  title: {
+    top: 10,
+    justifyContent: "center",
+    alignItems: "center",
   },
   titleText: {
     fontSize: 25,
     fontWeight: "bold",
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center",
   },
   titleText1: {
     fontSize: 12,
     fontWeight: "bold",
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: "#FF9B00"
+    justifyContent: "center",
+    alignItems: "center",
+    color: "#FF9B00",
   },
 });

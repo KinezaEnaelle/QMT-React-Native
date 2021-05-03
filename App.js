@@ -15,7 +15,7 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
         {/* <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} /> */}
-        <Stack.Screen name='LoginScreen' component={LoginScreen}/>
+        {/* <Stack.Screen name='LoginScreen' component={LoginScreen}/> */}
         <Stack.Screen name = 'RegisterScreen' component={RegisterScreen}/>
         {/* <Stack.Screen name= 'DashbordScreen' component={DashboardScreen}/> */}
         <Stack.Screen name = 'ConvertScreen' component={ConvertScreen}/>
