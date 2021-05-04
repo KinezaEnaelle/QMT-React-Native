@@ -10,7 +10,6 @@ import {
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 import { Formik } from "formik";
-import { BottomNavigation } from "react-native-paper";
 
 function RegisterScreen(props) {
     const navigation = useNavigation();
