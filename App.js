@@ -18,15 +18,15 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator headerMode="none">
-        {/* <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} /> */}
-        {/* <Stack.Screen name='LoginScreen' component={LoginScreen}/> */}
-        {/* <Stack.Screen name = 'RegisterScreen' component={RegisterScreen}/> */}
+        <Stack.Screen name="WelcomeScreen" component={WelcomeScreen} />
+        <Stack.Screen name='LoginScreen' component={LoginScreen}/>
+        <Stack.Screen name = 'RegisterScreen' component={RegisterScreen}/>
         <Stack.Screen name= 'DashboardScreen' component={DashboardScreen}/>
-         {/* <Stack.Screen name = 'ConvertScreen' component={ConvertScreen}/> */}
-        {/* <Stack.Screen name = 'SendScreen' component={SendScreen}/> */}
-        {/* <Stack.Screen name = 'RechargeScreen' component={RechargeScreen}/> */}
-        {/* <Stack.Screen name = 'BankScreen' component={BankScreen}/> */}
-        {/* <Stack.Screen name = 'WalletScreen' component={WalletScreen}/> */}
+        <Stack.Screen name = 'ConvertScreen' component={ConvertScreen}/>
+        <Stack.Screen name = 'SendScreen' component={SendScreen}/>
+        <Stack.Screen name = 'RechargeScreen' component={RechargeScreen}/>
+        <Stack.Screen name = 'BankScreen' component={BankScreen}/>
+        <Stack.Screen name = 'WalletScreen' component={WalletScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

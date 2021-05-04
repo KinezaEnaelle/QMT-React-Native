@@ -8,21 +8,22 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { StackActions, useNavigation } from "@react-navigation/native";
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import * as Animatable from 'react-native-animatable';
 
 function WelcomeScreen() {
   const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
+      <Animatable.View style={styles.header} animation='zoomInDown' duration={1500}>
       <Image
           source={require('C:/Users/David Edgard/Desktop/Finn Solutions Projects/QMT/assets/wallet-logo.gif')}
           style={styles.image} 
         />
         <Text style={styles.text}>{"\n"}Welcome to Quick Money Transfer</Text>
         <Text style={styles.textWelcome}>{"\n"}A mobile  application that unifies EAC to send or receive money.</Text>
-      </View>
-      <View style={styles.body}>
+      </Animatable.View>
+      <Animatable.View style={styles.body} animation='fadeIn' duration={1500}>
         <Ionicons name='ios-checkmark-circle' style={styles.icons}>
           <Text style={styles.textIcons}> 100% secure</Text>
             </Ionicons>
@@ -41,9 +42,9 @@ function WelcomeScreen() {
         <Ionicons name='ios-checkmark-circle' style={styles.icons}>
         <Text style={styles.textIcons}> Faster Checkout experience</Text>
         </Ionicons>
-      </View>
+      </Animatable.View>
 
-      <View style={styles.footer}>
+      <Animatable.View style={styles.footer} animation='zoomInDown' duration={1500}>
         <TouchableOpacity
           style={styles.buttonStyle1}
           onPress={() =>
@@ -60,7 +61,7 @@ function WelcomeScreen() {
         >
           <Text style={styles.buttonText}>Register</Text>
         </TouchableOpacity>
-      </View>
+      </Animatable.View>
     </SafeAreaView>
   );
 }
