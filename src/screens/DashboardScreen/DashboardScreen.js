@@ -17,51 +17,52 @@ function DashboardScreen() {
           }}
         />
         <View style={styles.textHeader}>
-          <Text>Kineza Iris</Text>
+          <Text>Mukunde Didine</Text>
           <Text>Rwanda</Text>
         </View>
       </View>
       <View style={styles.body}>
         <Animatable.View style={styles.content1} animation='bounceInUp' duration={1500}>
           <View style={styles.topBox}>
-            <Text>Balance</Text>
+            <Text style={styles.topText}>Balance</Text>
+            <Text style={styles.money}> Rwf 28900.00</Text>
           </View>
         </Animatable.View>
         <View style={styles.content2}>
           <Animatable.View style={styles.content3} animation='bounceInLeft' duration={1500}>
             <TouchableOpacity style={styles.box1} onPress={() =>{}}>
             <Text style={styles.boxLine1}></Text>
-            <Ionicons name='cash' style={styles.boxText}>
-            <Text style={styles.boxText}>Hello</Text>
+            <Text style={styles.boxText}>{"\n"}Recharge</Text>
+            <Ionicons name='cash' style={styles.boxText4}>
             </Ionicons>
                 
                 </TouchableOpacity>
             <TouchableOpacity style={styles.box2} onPress={() =>{}}>
             <Text style={styles.boxLine2}></Text>
-            <Ionicons name='logo-bitcoin' style={styles.boxText}>
-            <Text style={styles.boxText}>Hello</Text>
+            <Text style={styles.boxText}>{"\n"}Currency Excange</Text>
+            <Ionicons name='logo-bitcoin' style={styles.boxText3}>
             </Ionicons>
                 </TouchableOpacity>
           </Animatable.View>
           <Animatable.View style={styles.content4} animation='bounceInRight' duration={1500}>
             <TouchableOpacity style={styles.box3} onPress={() =>{}}>
             <Text style={styles.boxLine3}></Text>
-            <Ionicons name='list-circle-sharp' style={styles.boxText}>
-            <Text style={styles.boxText}>Hello</Text>
+            <Text style={styles.boxText}>{"\n"}Transactions</Text>
+            <Ionicons name='list-circle-sharp' style={styles.boxText2}>
             </Ionicons>
                 </TouchableOpacity>
             <TouchableOpacity style={styles.box4} onPress={() =>{}}>
             <Text style={styles.boxLine4}></Text>
-            <Ionicons name='settings' style={styles.boxText}>
-            <Text style={styles.boxText}>Hello</Text>
+            <Text style={styles.boxText}>{"\n"} Settings</Text>
+            <Ionicons name='settings' style={styles.boxText1}>
             </Ionicons>
                 </TouchableOpacity>
           </Animatable.View>
         </View>
       </View>
-      <View style={styles.footer}>
+      {/* <View style={styles.footer}>
         <Text>Hello</Text>
-      </View>
+      </View> */}
     </SafeAreaView>
   );
 }
@@ -104,70 +105,78 @@ export const styles = StyleSheet.create({
   content2: {
     flex: 2,
     flexDirection: "column",
+    bottom: 10
   },
   content3: {
     flex: 2,
     flexDirection: "row",
+    bottom: 10
   },
   content4: {
     flex: 2,
     flexDirection: "row",
+    bottom: 10
   },
   topBox: {
     borderRadius: 20,
     padding: 10,
-    backgroundColor: "lightgrey",
-    height: 150,
+    backgroundColor: "#E2DFDF",
+    height: 130,
   },
   box1: {
     flex: 1,
-    backgroundColor: "lightgrey",
+    backgroundColor: "#E2DFDF",
     borderRadius: 15,
     marginRight: 12,
     marginBottom: 10,
+    height: 150
   },
   box2: {
     flex: 1,
-    backgroundColor: "lightgrey",
+    backgroundColor: "#E2DFDF",
     borderRadius: 15,
     marginBottom: 10,
+    height: 150
   },
   box3: {
     flex: 1,
-    backgroundColor: "lightgrey",
+    backgroundColor: "#E2DFDF",
     borderRadius: 15,
     marginRight: 12,
     marginBottom: 10,
+    height: 150
   },
   box4: {
     flex: 1,
-    backgroundColor: "lightgrey",
+    backgroundColor: "#E2DFDF",
     borderRadius: 15,
     marginBottom: 10,
+    height: 150
   },
   boxText: {
-      padding: 20
+      padding: 20,
+      fontSize: 16
   },
   boxLine1:{
       padding:10,
       borderBottomWidth:3,
       width: 100,
      left: 20,
-     borderColor:'lightblue'
+     borderColor:"#668CFF"
   },
   boxLine2:{
     padding:10,
     borderBottomWidth:3,
     width: 100,
    left: 20,
-   borderColor:'pink'
+   borderColor: "#DD11B0"
 },
 boxLine3:{
     padding:10,
     borderBottomWidth:3,
     width: 100,
    left: 20,
-   borderColor:'yellow'
+   borderColor:"#FF9B00"
 },
 boxLine4:{
     padding:10,
@@ -175,5 +184,39 @@ boxLine4:{
     width: 100,
    left: 20,
    borderColor:'black'
+},
+boxText1: {
+    padding: 12,
+    fontSize: 25,
+    color: "#D25252",
+    bottom: 10
+},
+boxText2: {
+    padding: 12,
+    fontSize: 25,
+    color: "#1EBCBC",
+    bottom: 10
+},
+boxText3: {
+    padding: 12,
+    fontSize: 25,
+    color: "#57B894",
+    bottom: 23
+},
+boxText4: {
+    padding: 12,
+    fontSize: 25,
+    color: "#D25252",
+    bottom: 10
+},
+topText: {
+    color: "#564FA6",
+    fontWeight: "bold",
+    fontSize: 20
+},
+money: {
+    fontWeight: "bold",
+    left: 180,
+    fontSize: 17
 }
 });
