@@ -40,7 +40,7 @@ function LoginScreen() {
           <TouchableOpacity
             style={styles.buttonStyle}
             onPress={() =>
-              navigation.dispatch(StackActions.replace("ConvertScreen"))
+              navigation.dispatch(StackActions.replace("DashboardScreen"))
             }
           >
             <Text style={styles.buttonText}>Log in</Text>
@@ -68,11 +68,6 @@ export default LoginScreen;
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    color: "blue",
     alignItems: "center",
     justifyContent: "center",
   },

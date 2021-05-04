@@ -88,7 +88,8 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FF9B00',
     borderRadius: 30,
     width: 120,
-    height: 38
+    height: 38,
+    marginLeft: 12
   },
   buttonStyle1: {
     padding: 12,
@@ -100,8 +101,12 @@ export const styles = StyleSheet.create({
   buttonText: {
     color: "white",
     alignItems: 'center',
-    justifyContent: 'center'
-  },
+    justifyContent: 'center',
+    marginLeft:  30,
+    marginBottom: 5,
+    fontSize: 14,
+    fontWeight: "bold"
+ },
   header: {
     alignItems: "stretch",
     flex: 1,

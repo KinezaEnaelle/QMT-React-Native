@@ -10,6 +10,7 @@ import {
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 import { Formik } from "formik";
+import { BottomNavigation } from "react-native-paper";
 
 function RegisterScreen(props) {
     const navigation = useNavigation();
@@ -65,7 +66,7 @@ function RegisterScreen(props) {
           <TouchableOpacity
             style={styles.buttonStyle}
             onPress={() =>
-              navigation.dispatch(StackActions.replace("ConvertScreen"))
+              navigation.dispatch(StackActions.replace("DashboardScreen"))
             }
           >
             <Text style={styles.buttonText}>Register</Text>
@@ -104,7 +105,7 @@ export const styles = StyleSheet.create({
   box: {
     backgroundColor: "#E2DFDF",
     width: 290,
-    height: 650,
+    height: 680,
     borderRadius: 8,
   },
   body: {
@@ -118,6 +119,7 @@ export const styles = StyleSheet.create({
     padding: 12,
     color: "#fff",
     backgroundColor: "white",
+    marginBottom: 10
   },
   textInput1: {
     borderWidth: 1,
@@ -126,7 +128,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    top: 10,
+    marginBottom: 10
   },
   textInput2: {
     borderWidth: 1,
@@ -135,7 +137,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    top: 10,
+    marginBottom: 10
   },
   textInput3: {
     borderWidth: 1,
@@ -144,7 +146,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    top: 10,
+    marginBottom: 10
   },
   textInput4: {
     borderWidth: 1,
@@ -153,7 +155,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    top: 10,
+    marginBottom: 10
   },
   textInput5: {
     borderWidth: 1,
@@ -162,7 +164,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    top: 10,
+    marginBottom: 10
   },
   textInput6: {
     borderWidth: 1,
@@ -171,7 +173,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    top: 10,
+    marginBottom: 10
   },
   textInput7: {
     borderWidth: 1,
@@ -180,7 +182,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    top: 10,
+    marginBottom: 10
   },
   header: {
     top: 70,
