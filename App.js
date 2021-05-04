@@ -8,6 +8,7 @@ import  RegisterScreen  from "./src/screens/RegisterScreen";
 import ConvertScreen from "./src/screens/ConvertScreen";
 import DashboardScreen from "./src/screens/DashboardScreen";
 import  SendScreen  from "./src/screens/SendScreen";
+import  RechargeScreen  from "./src/screens/RechargeScreen";
 
 const Stack = createStackNavigator();
 
@@ -20,7 +21,8 @@ export default function App() {
         <Stack.Screen name = 'RegisterScreen' component={RegisterScreen}/>
         <Stack.Screen name= 'DashbordScreen' component={DashboardScreen}/> */}
         {/* <Stack.Screen name = 'ConvertScreen' component={ConvertScreen}/> */}
-        <Stack.Screen name = 'SendScreen' component={SendScreen}/>
+        {/* <Stack.Screen name = 'SendScreen' component={SendScreen}/> */}
+        <Stack.Screen name = 'RechargeScreen' component={RechargeScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

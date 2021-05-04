@@ -69,7 +69,7 @@ function SendScreen(props) {
                 navigation.dispatch(StackActions.replace("DashboardScreen"))
               }
             >
-              <Text style={styles.buttonText}>Register</Text>
+              <Text style={styles.buttonText}>Continue</Text>
             </TouchableOpacity>
           </View>
         </View>
