@@ -9,6 +9,7 @@ import ConvertScreen from "./src/screens/ConvertScreen";
 import DashboardScreen from "./src/screens/DashboardScreen";
 import  SendScreen  from "./src/screens/SendScreen";
 import  RechargeScreen  from "./src/screens/RechargeScreen";
+import  BankScreen  from "./src/screens/BankScreen";
 
 const Stack = createStackNavigator();
 
@@ -22,7 +23,8 @@ export default function App() {
         <Stack.Screen name= 'DashbordScreen' component={DashboardScreen}/> */}
         {/* <Stack.Screen name = 'ConvertScreen' component={ConvertScreen}/> */}
         {/* <Stack.Screen name = 'SendScreen' component={SendScreen}/> */}
-        <Stack.Screen name = 'RechargeScreen' component={RechargeScreen}/>
+        {/* <Stack.Screen name = 'RechargeScreen' component={RechargeScreen}/> */}
+        <Stack.Screen name = 'BankScreen' component={BankScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
