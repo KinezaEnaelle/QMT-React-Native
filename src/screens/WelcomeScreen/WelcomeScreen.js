@@ -16,10 +16,7 @@ function WelcomeScreen() {
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
       <Image
-          source={{
-            uri:
-              "https://media3.picsearch.com/is?nRcRGte6978Y73p3-K2xUOd8LkvbBK4zmDCPLTgWRR8&height=256",
-          }}
+          source={require('C:/Users/David Edgard/Desktop/Finn Solutions Projects/QMT/assets/wallet-logo.gif')}
           style={styles.image} 
         />
         <Text style={styles.text}>{"\n"}Welcome to Quick Money Transfer</Text>
@@ -127,8 +124,8 @@ export const styles = StyleSheet.create({
     bottom: 40
   },
   image: {
-    height: 170,
-    width: 170,
+    height: 250,
+    width: 250,
     borderRadius: 100,
   },
   icons: {
