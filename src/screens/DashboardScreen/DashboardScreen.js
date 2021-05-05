@@ -17,8 +17,8 @@ function DashboardScreen() {
           }}
         />
         <View style={styles.textHeader}>
-          <Text>Mukunde Didine</Text>
-          <Text>Rwanda</Text>
+          <Text>MUKUNDE DIDINE</Text>
+          <Text style={styles.country}>Rwanda</Text>
         </View>
       </View>
       <View style={styles.body}>
@@ -30,7 +30,9 @@ function DashboardScreen() {
         </Animatable.View>
         <View style={styles.content2}>
           <Animatable.View style={styles.content3} animation='bounceInLeft' duration={1500}>
-            <TouchableOpacity style={styles.box1} onPress={() =>{}}>
+            <TouchableOpacity style={styles.box1} onPress={() => 
+              navigation.dispatch(StackActions.replace("RechargeScreen"))
+            }>
             <Text style={styles.boxLine1}></Text>
             <Text style={styles.boxText}>{"\n"}Recharge</Text>
             <Ionicons name='cash' style={styles.boxText4}>
@@ -45,13 +47,17 @@ function DashboardScreen() {
                 </TouchableOpacity>
           </Animatable.View>
           <Animatable.View style={styles.content4} animation='bounceInRight' duration={1500}>
-            <TouchableOpacity style={styles.box3} onPress={() =>{}}>
+            <TouchableOpacity style={styles.box3} onPress={() => 
+              navigation.dispatch(StackActions.replace("SendScreen"))
+            }>
             <Text style={styles.boxLine3}></Text>
             <Text style={styles.boxText}>{"\n"}Transactions</Text>
             <Ionicons name='list-circle-sharp' style={styles.boxText2}>
             </Ionicons>
                 </TouchableOpacity>
-            <TouchableOpacity style={styles.box4} onPress={() =>{}}>
+            <TouchableOpacity style={styles.box4} onPress={() => 
+              navigation.dispatch(StackActions.replace("BankScreen"))
+            }>
             <Text style={styles.boxLine4}></Text>
             <Text style={styles.boxText}>{"\n"} Settings</Text>
             <Ionicons name='settings' style={styles.boxText1}>
@@ -218,5 +224,8 @@ money: {
     fontWeight: "bold",
     left: 180,
     fontSize: 17
+},
+country: {
+    fontWeight: "bold"
 }
 });
