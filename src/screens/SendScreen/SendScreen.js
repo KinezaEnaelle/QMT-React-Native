@@ -11,6 +11,15 @@ import { TextInput } from "react-native-gesture-handler";
 import { Formik } from "formik";
 
 function SendScreen(props) {
+  // const [open, setOpen] = useState(false);
+  // const [country, setCountry] = useState(null);
+  // const [countries, setCountries] = useState([
+  //   { label: "RWANDA", value: "rwanda" },
+  //   { label: "BURUNDI", value: "burundi" },
+  //   { label: "UGANDA", value: "uganda" },
+  //   { label: "TANZANIA", value: "tanzania" },
+  //   { label: "KENYA", value: "kenya" },
+  // ]);
     const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.container}>

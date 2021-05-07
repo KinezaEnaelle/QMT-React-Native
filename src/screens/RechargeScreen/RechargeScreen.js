@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -10,8 +10,23 @@ import {
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 import { Formik } from "formik";
+import DropDownPicker from "react-native-dropdown-picker";
 
 function RechargeScreen(props) {
+  const [open1, setOpen1] = useState(false);
+  const [bank, setBank] = useState(null);
+  const [banks, setBanks] = useState([
+    { label: "BANK1", value: "bank1" },
+    { label: "BANK2", value: "bank2" },
+   
+  ]);
+  const [open2, setOpen2] = useState(false);
+  const [currency, setCurrency] = useState(null);
+  const [currencies, setCurrencies] = useState([
+    { label: "CURRENCY1", value: "currency1" },
+    { label: "CURRENCY2", value: "currency2" },
+   
+  ]);
     const navigation = useNavigation();
     return (
         <SafeAreaView style={styles.container}>
@@ -22,15 +37,33 @@ function RechargeScreen(props) {
         <View style={styles.body}>
           <Formik>
             <Fragment>
-              <TextInput
-                placeholder="Choose Bank"
-                placeholderTextColor="#C4C4C4"
-                style={styles.textInput}
+            <DropDownPicker
+                open={open1}
+                value={bank}
+                items={banks}
+                setValue={setBank}
+                setItems={setBanks}
+                setOpen={setOpen1}
+                searchable={false}
+                placeholder='Choose Bank'
+                placeholderStyle={{
+                  color: "#adadad",
+              }}
+              style={{ borderColor: '#f2f2f2', bottom: 30}}
               />
-              <TextInput
-                placeholder="Choose Currency"
-                placeholderTextColor="#C4C4C4"
-                style={styles.textInput2}
+             <DropDownPicker
+                open={open2}
+                value={currency}
+                items={currencies}
+                setValue={setCurrency}
+                setItems={setCurrencies}
+                setOpen={setOpen2}
+                searchable={false}
+                placeholder='Choose Currency'
+                placeholderStyle={{
+                  color: "#adadad",
+              }}
+              style={{ borderColor: '#f2f2f2', bottom: 4}}
               />
               <TextInput
                 placeholder="Enter amount"

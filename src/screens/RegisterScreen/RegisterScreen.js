@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import {
   View,
   StyleSheet,
@@ -10,9 +10,19 @@ import {
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 import { Formik } from "formik";
+import DropDownPicker from "react-native-dropdown-picker";
 
 function RegisterScreen(props) {
-    const navigation = useNavigation();
+  const [open, setOpen] = useState(false);
+  const [country, setCountry] = useState(null);
+  const [countries, setCountries] = useState([
+    { label: "RWANDA", value: "rwanda" },
+    { label: "BURUNDI", value: "burundi" },
+    { label: "UGANDA", value: "uganda" },
+    { label: "TANZANIA", value: "tanzania" },
+    { label: "KENYA", value: "kenya" },
+  ]);
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.box}>
@@ -38,10 +48,18 @@ function RegisterScreen(props) {
                 placeholderTextColor="#C4C4C4"
                 style={styles.textInput2}
               />
-              <TextInput
-                placeholder="Country"
-                placeholderTextColor="#C4C4C4"
-                style={styles.textInput3}
+              <DropDownPicker
+                open={open}
+                value={country}
+                items={countries}
+                setValue={setCountry}
+                setItems={setCountries}
+                setOpen={setOpen}
+                placeholder='Country'
+                placeholderStyle={{
+                  color: "#adadad",
+              }}
+              style={{ borderColor: '#f2f2f2', bottom: 4}}
               />
               <TextInput
                 placeholder="Phone"
@@ -104,8 +122,9 @@ export const styles = StyleSheet.create({
   box: {
     backgroundColor: "#E2DFDF",
     width: 290,
-    height: 680,
+    height: 660,
     borderRadius: 8,
+    top: 15
   },
   body: {
     padding: 12,
@@ -118,7 +137,7 @@ export const styles = StyleSheet.create({
     padding: 12,
     color: "#fff",
     backgroundColor: "white",
-    marginBottom: 10
+    marginBottom: 10,
   },
   textInput1: {
     borderWidth: 1,
@@ -127,7 +146,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    marginBottom: 10
+    marginBottom: 10,
   },
   textInput2: {
     borderWidth: 1,
@@ -136,7 +155,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    marginBottom: 10
+    marginBottom: 10,
   },
   textInput3: {
     borderWidth: 1,
@@ -145,7 +164,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    marginBottom: 10
+    marginBottom: 10,
   },
   textInput4: {
     borderWidth: 1,
@@ -154,7 +173,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    marginBottom: 10
+    marginBottom: 10,
   },
   textInput5: {
     borderWidth: 1,
@@ -163,7 +182,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    marginBottom: 10
+    marginBottom: 10,
   },
   textInput6: {
     borderWidth: 1,
@@ -172,7 +191,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    marginBottom: 10
+    marginBottom: 10,
   },
   textInput7: {
     borderWidth: 1,
@@ -181,7 +200,7 @@ export const styles = StyleSheet.create({
     padding: 14,
     color: "#fff",
     backgroundColor: "white",
-    marginBottom: 10
+    marginBottom: 10,
   },
   header: {
     top: 70,

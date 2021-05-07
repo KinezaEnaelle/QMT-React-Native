@@ -82,19 +82,21 @@ export const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   buttonStyle: {
-    padding: 12,
     backgroundColor: '#FF9B00',
     borderRadius: 30,
     width: 120,
     height: 38,
-    marginLeft: 12
+    marginLeft: 12,
+    justifyContent: "center",
+    alignItems: "center"
   },
   buttonStyle1: {
-    padding: 12,
     backgroundColor: '#668CFF',
     borderRadius: 30,
     width: 120,
-    height: 38
+    height: 38,
+    justifyContent: "center",
+    alignItems: "center"
   },
   buttonText: {
     color: "white",
@@ -103,7 +105,8 @@ export const styles = StyleSheet.create({
     marginLeft:  30,
     marginBottom: 5,
     fontSize: 14,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    right: 20
  },
   header: {
     alignItems: "stretch",

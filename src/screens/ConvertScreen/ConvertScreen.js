@@ -1,81 +1,57 @@
 import React, { useEffect, useState, Fragment } from "react";
+import { StackActions, useNavigation } from "@react-navigation/native";
 import { SafeAreaView, View, StyleSheet, Image, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 import { Formik } from "formik";
-import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+import Menu, { MenuItem, MenuDivider } from "react-native-material-menu";
 import { Button } from "react-native-paper";
 
 function ConvertScreen() {
-  // _menu = null;
-
-  // setMenuRef = ref => {
-  //   this._menu = ref;
-  // };
-
-  // hideMenu = () => {
-  //   this._menu.hide();
-  // };
-
-  // showMenu = () => {
-  //   this._menu.show();
-  // };
+  const navigation = useNavigation();
   return (
     <SafeAreaView style={styles.container}>
-       {/* <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Menu
-          ref={this.setMenuRef}
-          button={<Text onPress={this.showMenu}>
-            <Ionicons name='md-menu' style={styles.icons}></Ionicons>
-            Show menu</Text>}
-        >
-          <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
-          <MenuItem onPress={this.hideMenu}>Menu item 2</MenuItem>
-          <MenuItem onPress={this.hideMenu} disabled>
-            Menu item 3
-          </MenuItem>
-          <MenuDivider />
-          <MenuItem onPress={this.hideMenu}>Menu item 4</MenuItem>
-        </Menu>
-      </View> */}
       <View style={styles.header}>
-      <Image
+        <Image
+          style={styles.image}
           source={{
             uri:
               "https://media3.picsearch.com/is?nRcRGte6978Y73p3-K2xUOd8LkvbBK4zmDCPLTgWRR8&height=256",
           }}
-          style={styles.image} 
         />
+        <View style={styles.textHeader}>
+          <Text>MUKUNDE DIDINE</Text>
+          <Text style={styles.country}>Rwanda</Text>
+        </View>
       </View>
       <View style={styles.body}>
         <Text style={styles.title}>Enter amount to exchnage</Text>
         <Formik>
-            <Fragment>
-              <TextInput
-                placeholder="Email or Phone"
-                placeholderTextColor="#C4C4C4"
-                style={styles.textInput}
-              />
-              <TextInput
-                placeholder="Password"
-                placeholderTextColor="#C4C4C4"
-                style={styles.textInput2}
-              />
-              <TextInput
-                placeholder="Password"
-                placeholderTextColor="#C4C4C4"
-                style={styles.textInput2}
-              />
-              <TextInput
-                placeholder="Password"
-                placeholderTextColor="#C4C4C4"
-                style={styles.textInput2}
-              />
-            </Fragment>
-          </Formik>
-          <Button style={styles.button}>Convert</Button>
+          <Fragment>
+            <TextInput
+              placeholder="Choose currency"
+              placeholderTextColor="#C4C4C4"
+              style={styles.textInput}
+            />
+            <TextInput
+              placeholder="Enter amount"
+              placeholderTextColor="#C4C4C4"
+              style={styles.textInput2}
+            />
+            <TextInput
+              placeholder="Choose currency"
+              placeholderTextColor="#C4C4C4"
+              style={styles.textInput2}
+            />
+            <TextInput
+              placeholder="Your amount"
+              placeholderTextColor="#C4C4C4"
+              style={styles.textInput2}
+            />
+          </Fragment>
+        </Formik>
+        <Button style={styles.button}>Convert</Button>
       </View>
-      <View style={styles.footer}>
-      </View>
+      <View style={styles.footer}></View>
     </SafeAreaView>
   );
 }
@@ -89,29 +65,36 @@ export const styles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#fff",
   },
-  header: {
-    margin: 10,
-    padding: 10,
-  },
   image: {
-    height: 70,
-    width: 70,
+    height: 80,
+    width: 80,
     borderRadius: 100,
+    right: 130,
+  },
+  header: {
+    flex: 0.3,
+    padding: 30,
+    left: 10,
+    top: 10
+  },
+  textHeader: {
+    bottom: 60,
+    right: 40,
   },
   body: {
     alignItems: "stretch",
-    flex: 1,
+    flex: 1.2,
     width: "100%",
     backgroundColor: "#474749",
     justifyContent: "center",
     alignItems: "center",
     color: "white",
-    borderBottomLeftRadius: 35,
-    borderBottomRightRadius: 35,
+    // borderBottomLeftRadius: 35,
+    // borderBottomRightRadius: 35,
   },
   title: {
-    color: "white",
-    fontSize: 16
+    color: "black",
+    fontSize: 16,
   },
   textInput: {
     borderWidth: 1,
@@ -129,7 +112,7 @@ export const styles = StyleSheet.create({
     color: "#fff",
     backgroundColor: "white",
     top: 10,
-  }, 
+  },
   button: {
     padding: 8,
     backgroundColor: "#FF9B00",
