@@ -7,25 +7,75 @@ import {
   Image,
   Text,
   TouchableOpacity,
+  RefreshControl
 } from "react-native";
+import useWalletInfo from "../../hooks/wallet/useWallet";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { getData, removeData } from "../../helper/storageHelper";
 import * as Animatable from "react-native-animatable";
+import { ScrollView } from "react-native";
 
+const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout))
+};
 function DashboardScreen() {
+  const walletInfoHook = useWalletInfo();
+  const [refreshing, setRefreshing] = useState(false)
+  const [balance, setBalance] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
+  const [country, setCountry] = useState("");
+  const [currency, setCurrency] = useState("");
   const navigation = useNavigation();
+
+  useEffect(() => {
+    walletInfo();
+  }, []);
+  useEffect(() => {
+    if (walletInfoHook.successResponse.data) {
+      setBalance(walletInfoHook.successResponse.data.balance);
+      setCurrency(walletInfoHook.successResponse.data.currency);
+    }
+  }, [walletInfoHook.successResponse]);
+  const refreshPage = async () => {
+    setRefreshing(true);
+    wait(3000).then(() => {
+      walletInfo();
+      setRefreshing(false);
+    })
+  }
+  const walletInfo = async () => {
+    const userId = await getData("id");
+    const fname = await getData("fname");
+    const lname = await getData("lname");
+    const country = await getData("country");
+    setFname(fname);
+    setLname(lname);
+    setCountry(country);
+    walletInfoHook.sendRequest(userId);
+  };
   return (
     <SafeAreaView style={styles.container}>
+      <ScrollView 
+      contentContainerStyle={styles.scrollView}
+      refreshControl={
+        <RefreshControl
+          colors={['#db7100']}
+          refreshing={refreshing}
+          onRefresh={refreshPage}  
+        />
+      }
+      >
       <View style={styles.header}>
         <Image
           style={styles.image}
           source={{
-            uri:
-              "https://media3.picsearch.com/is?nRcRGte6978Y73p3-K2xUOd8LkvbBK4zmDCPLTgWRR8&height=256",
+            uri: "https://media3.picsearch.com/is?nRcRGte6978Y73p3-K2xUOd8LkvbBK4zmDCPLTgWRR8&height=256",
           }}
         />
         <View style={styles.textHeader}>
-          <Text>MUKUNDE DIDINE</Text>
-          <Text style={styles.country}>Rwanda</Text>
+          <Text>{fname + " " + lname}</Text>
+          <Text style={styles.country}>{country}</Text>
         </View>
       </View>
       <View style={styles.body}>
@@ -36,7 +86,7 @@ function DashboardScreen() {
         >
           <View style={styles.topBox}>
             <Text style={styles.topText}>Balance</Text>
-            <Text style={styles.money}> Rwf 28900.00</Text>
+            <Text style={styles.money}> {currency + " " + balance}</Text>
           </View>
         </Animatable.View>
         <View style={styles.content2}>
@@ -47,9 +97,7 @@ function DashboardScreen() {
           >
             <TouchableOpacity
               style={styles.box1}
-              onPress={() =>
-                navigation.dispatch(StackActions.replace("RechargeScreen"))
-              }
+              onPress={() => navigation.navigate("RechargeScreen")}
             >
               <Text style={styles.boxLine1}></Text>
               <Text style={styles.boxText}>{"\n"}Recharge</Text>
@@ -57,9 +105,7 @@ function DashboardScreen() {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.box2}
-              onPress={() =>
-                navigation.dispatch(StackActions.replace("RechargeScreen"))
-              }
+              onPress={() => navigation.navigate("SendScreen")}
             >
               <Text style={styles.boxLine2}></Text>
               <Text style={styles.boxText}>{"\n"}Currency Exchange</Text>
@@ -74,7 +120,7 @@ function DashboardScreen() {
             <TouchableOpacity
               style={styles.box3}
               onPress={() =>
-                navigation.dispatch(StackActions.replace("ConvertScreen"))
+                navigation.navigate("TransactionScreen")
               }
             >
               <Text style={styles.boxLine3}></Text>
@@ -86,7 +132,9 @@ function DashboardScreen() {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.box4}
-              onPress={() => navigation.dispatch(StackActions.replace("SendScreen"))}
+              onPress={() =>
+                navigation.navigate("")
+              }
             >
               <Text style={styles.boxLine4}></Text>
               <Text style={styles.boxText}>{"\n"} Settings</Text>
@@ -99,12 +147,16 @@ function DashboardScreen() {
         <TouchableOpacity
           style={styles.buttonStyle}
           onPress={() =>
-            navigation.dispatch(StackActions.replace("BankScreen"))
+            // navigation.navigate("RegisterAccountScreen")
+            removeData('token')
           }
         >
           <Text style={styles.footerText}>Add Your Bank Account</Text>
+          <Text style={styles.footerText}>LOGOUT</Text>
         </TouchableOpacity>
       </View>
+      </ScrollView>
+      
     </SafeAreaView>
   );
 }
@@ -116,6 +168,10 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "white",
+  },
+  scrollView: {
+width: '100%',
+height: '100%'
   },
   text: {
     justifyContent: "center",
@@ -131,15 +187,15 @@ export const styles = StyleSheet.create({
   header: {
     flex: 0.3,
     padding: 30,
-    left: 10,
-    top: 10,
+    left: 100,
+    // top: 16,
   },
   textHeader: {
     bottom: 60,
     right: 40,
   },
   body: {
-    flex: 5,
+    flex: 2,
     flexDirection: "column",
     width: 300,
   },
@@ -147,7 +203,7 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   content2: {
-    flex: 2,
+    flex: 1.9,
     flexDirection: "column",
     bottom: 10,
   },
@@ -164,9 +220,9 @@ export const styles = StyleSheet.create({
   topBox: {
     borderRadius: 20,
     padding: 10,
+    flex:0.6,
     backgroundColor: "#E2DFDF",
     height: 110,
-    top: 30
   },
   box1: {
     flex: 1,
@@ -267,7 +323,9 @@ export const styles = StyleSheet.create({
   country: {
     fontWeight: "bold",
   },
-  footer: {},
+  footer: {
+    left: 25
+  },
   buttonStyle: {
     padding: 12,
     backgroundColor: "#E2DFDF",
@@ -275,10 +333,10 @@ export const styles = StyleSheet.create({
     width: 250,
     justifyContent: "center",
     alignItems: "center",
-    bottom: 20
+    bottom: 20,
   },
   footerText: {
-    color:   "#FF9B00",
+    color: "#FF9B00",
     fontWeight: "bold",
   },
 });

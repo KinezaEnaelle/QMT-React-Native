@@ -21,10 +21,10 @@ function RechargeScreen(props) {
    
   ]);
   const [open2, setOpen2] = useState(false);
-  const [currency, setCurrency] = useState(null);
-  const [currencies, setCurrencies] = useState([
-    { label: "CURRENCY1", value: "currency1" },
-    { label: "CURRENCY2", value: "currency2" },
+  const [account, setAccount] = useState(null);
+  const [accounts, setAccounts] = useState([
+    { label: "ACCOUNT1", value: "account1" },
+    { label: "ACCOUNT2", value: "account2" },
    
   ]);
     const navigation = useNavigation();
@@ -49,21 +49,21 @@ function RechargeScreen(props) {
                 placeholderStyle={{
                   color: "#adadad",
               }}
-              style={{ borderColor: '#f2f2f2', bottom: 30}}
+              style={{ borderColor: '#f2f2f2', top: 30}}
               />
-             <DropDownPicker
+              <DropDownPicker
                 open={open2}
-                value={currency}
-                items={currencies}
-                setValue={setCurrency}
-                setItems={setCurrencies}
+                value={account}
+                items={accounts}
+                setValue={setAccount}
+                setItems={setAccounts}
                 setOpen={setOpen2}
                 searchable={false}
-                placeholder='Choose Currency'
+                placeholder='Choose Account'
                 placeholderStyle={{
                   color: "#adadad",
               }}
-              style={{ borderColor: '#f2f2f2', bottom: 4}}
+              style={{ borderColor: '#f2f2f2', top: 45}}
               />
               <TextInput
                 placeholder="Enter amount"
@@ -77,7 +77,7 @@ function RechargeScreen(props) {
           <TouchableOpacity
             style={styles.buttonStyle2}
             onPress={() =>
-              navigation.dispatch(StackActions.replace("RegisterScreen"))
+              navigation.navigate("WalletScreen")
             }
           >
             <Text style={styles.buttonText}>Recharge</Text>
@@ -99,9 +99,11 @@ export const styles = StyleSheet.create({
         padding: 12,
         backgroundColor: "#FF9B00",
         borderRadius: 30,
-        width: 250,
+        width: 320,
         justifyContent: "center",
         alignItems: "center",
+        bottom: 1,
+        top: 60
       },
       buttonText: {
         color: "white",
@@ -115,8 +117,8 @@ export const styles = StyleSheet.create({
       },
       box: {
         backgroundColor: "#E2DFDF",
-        width: 290,
-        height: 450,
+        width: 350,
+        height: 500,
         borderRadius: 25,
       },
       body: {
@@ -131,15 +133,6 @@ export const styles = StyleSheet.create({
         color: "#fff",
         backgroundColor: "white",
       },
-      textInput2: {
-        borderWidth: 1,
-        borderColor: "white",
-        borderRadius: 12,
-        padding: 14,
-        color: "#fff",
-        backgroundColor: "white",
-        top: 10,
-      },
       textInput3: {
         borderWidth: 1,
         borderColor: "white",
@@ -147,13 +140,8 @@ export const styles = StyleSheet.create({
         padding: 14,
         color: "#fff",
         backgroundColor: "white",
-        top: 10,
+        top: 50,
         marginTop:12
-      },
-      header: {
-        top: 70,
-        justifyContent: "center",
-        alignItems: "center",
       },
       body1: {
         top: 90,

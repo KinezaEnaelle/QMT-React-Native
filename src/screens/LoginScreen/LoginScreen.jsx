@@ -7,12 +7,33 @@ import {
   TouchableOpacity,
   Dimensions,
 } from "react-native";
+import * as Yup from 'yup'
+import { useEffect } from "react";
 import { StackActions, useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
+import { storeData, storeNumber } from "../../helper/storageHelper";
 import { Formik } from "formik";
+import useLogin from "../../hooks/auth/useLogin";
+import {useApi} from '../../context/Api';
 
 function LoginScreen() {
+  const loginHook = useLogin();
+  const api = useApi();
   const navigation = useNavigation();
+  useEffect(() => {
+if (loginHook.isSuccess) {
+  if(loginHook.successResponse.data.userData.role === 'USER'){
+    navigation.dispatch(StackActions.replace('DashboardScreen'));
+    storeData("token", loginHook.successResponse.data.token);
+    storeNumber("id", loginHook.successResponse.data.userData.id);
+    storeData("fname", loginHook.successResponse.data.userData.fname);
+    storeData("lname", loginHook.successResponse.data.userData.lname);
+    storeData("country", loginHook.successResponse.data.userData.country);
+    api.defaults.headers.common["Authorization"] =
+            loginHook.successResponse.data.token;
+  }
+}
+},[loginHook.isSuccess])
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.box}>
@@ -21,30 +42,55 @@ function LoginScreen() {
           <Text style={styles.titleText1}>To continue to QMT</Text>
         </View>
         <View style={styles.body}>
-          <Formik>
-            <Fragment>
+          <Formik initialValues={{
+            email: '',
+            password: ''
+          }}
+          validationSchema={Yup.object().shape({
+            email: Yup.string().required('No email provided').email('invalid email'),
+            password: Yup.string().required('No password provided'),
+          })}
+          onSubmit={({ email, password}) => {
+            loginHook.sendRequest(email, password);
+          }}>
+            {(props) => {
+              return (
+                <Fragment>
               <TextInput
-                placeholder="Email or Phone"
+                placeholder="Email"
                 placeholderTextColor="#C4C4C4"
                 style={styles.textInput}
+                value={props.values.email}
+                onChangeText={props.handleChange('email')}
+                onSubmitEditing={() => props.setFieldTouched('email')}
               />
+              {props.errors.email && (
+                <Text style={styles.errorPrompt}>{props.errors.email}</Text>
+              )}
               <TextInput
                 placeholder="Password"
                 placeholderTextColor="#C4C4C4"
                 style={styles.textInput2}
+                value={props.values.password}
+                onChangeText={props.handleChange('password')}
+                onSubmitEditing={() => props.setFieldTouched('password')}
               />
-            </Fragment>
-          </Formik>
-        </View>
-        <View style={styles.header}>
+              {props.errors.password && (
+                <Text style={styles.errorPrompt}>{props.errors.password}</Text>
+              )}
+              <View style={styles.header}>
           <TouchableOpacity
             style={styles.buttonStyle}
-            onPress={() =>
-              navigation.dispatch(StackActions.replace("DashboardScreen"))
-            }
+            onPress={props.handleSubmit}
+            disabled={loginHook.isLoading}
           >
-            <Text style={styles.buttonText}>Log in</Text>
+            <Text style={styles.buttonText}>{!loginHook.isLoading ? 'Login' : 'Loading...'}</Text>
           </TouchableOpacity>
+          {loginHook.error && (
+            <Text style={styles.errorPrompt}>
+              {loginHook?.error?.data?.error || 'Could not make request'}
+            </Text>
+          )}
         </View>
         <View style={styles.body1}>
           <Text>Don’t have an account?</Text>
@@ -59,7 +105,14 @@ function LoginScreen() {
             <Text style={styles.buttonText}>Register</Text>
           </TouchableOpacity>
         </View>
+            </Fragment>
+              )
+            }}
+            
+          </Formik>
       </View>
+        </View>
+        
     </SafeAreaView>
   );
 }
@@ -92,15 +145,15 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  textStyle: {
-    color: "pink",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  // textStyle: {
+  //   color: "black",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
   box: {
     backgroundColor: "#E2DFDF",
     width: 290,
-    height: 450,
+    height: 490,
     borderRadius: 8,
   },
   body: {
@@ -112,7 +165,7 @@ export const styles = StyleSheet.create({
     borderColor: "white",
     borderRadius: 12,
     padding: 12,
-    color: "#fff",
+    color: 'black',
     backgroundColor: "white",
   },
   textInput2: {
@@ -120,7 +173,7 @@ export const styles = StyleSheet.create({
     borderColor: "white",
     borderRadius: 12,
     padding: 14,
-    color: "#fff",
+    color: "black",
     backgroundColor: "white",
     top: 10,
   },
@@ -157,4 +210,8 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     color: "#FF9B00",
   },
+  errorPrompt: {
+    padding: 14,
+    color: '#ff2a00'
+  }
 });

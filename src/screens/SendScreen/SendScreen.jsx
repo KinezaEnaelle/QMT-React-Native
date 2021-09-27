@@ -6,11 +6,15 @@ import {
   Text,
   TouchableOpacity,
 } from "react-native";
+import * as Yup from 'yup'
 import { StackActions, useNavigation } from "@react-navigation/native";
+import useSendWallet from "../../hooks/wallet/useSendWallet";
+import { getData } from "../../helper/storageHelper";
 import { TextInput } from "react-native-gesture-handler";
 import { Formik } from "formik";
 
-function SendScreen(props) {
+function SendScreen() {
+  const sendWalletHook = useSendWallet();
   // const [open, setOpen] = useState(false);
   // const [country, setCountry] = useState(null);
   // const [countries, setCountries] = useState([
@@ -29,57 +33,87 @@ function SendScreen(props) {
             <Text style={styles.titleText1}>All Transactions</Text>
           </View>
           <View style={styles.body}>
-            <Formik>
+            <Formik initialValues={{
+            amount: '',
+            phoneNumber: '',
+            password: ''
+          }}
+          validationSchema={Yup.object().shape({
+            amount: Yup.string().required('No amount provided'),
+            phoneNumber: Yup.string().required('No phoneNumber provided'),
+            password: Yup.string().required('No password provided'),
+          })}
+          onSubmit={({ amount, phoneNumber, password}) => {
+            sendWalletHook.sendRequest(amount, phoneNumber, password);
+            navigation.navigate('DashboardScreen');
+          }}>
+            {(props) => {
+              return (
               <Fragment>
-                <TextInput
-                  placeholder="Enter receiver’s full name"
-                  placeholderTextColor="#C4C4C4"
-                  style={styles.textInput}
-                />
-                <TextInput
-                  placeholder="Enter receiver’s phone number"
-                  placeholderTextColor="#C4C4C4"
-                  style={styles.textInput1}
-                />
-                <TextInput
-                  placeholder="Enter receiver’s country"
-                  placeholderTextColor="#C4C4C4"
-                  style={styles.textInput2}
-                />
-                <Text>Sender's</Text>
                 <TextInput
                   placeholder="Enter amount"
                   placeholderTextColor="#C4C4C4"
+                  style={styles.textInput1}
+                  value={props.values.amount}
+                onChangeText={props.handleChange('amount')}
+                onSubmitEditing={() => props.setFieldTouched('amount')}
+                />
+                 {props.errors.amount && (
+                <Text style={styles.errorPrompt}>{props.errors.amount}</Text>
+              )}
+                <TextInput
+                  placeholder="Enter phoneNumber"
+                  placeholderTextColor="#C4C4C4"
+                  style={styles.textInput2}
+                  value={props.values.phoneNumber}
+                onChangeText={props.handleChange('phoneNumber')}
+                onSubmitEditing={() => props.setFieldTouched('phoneNumber')}
+                />
+                 {props.errors.phoneNumber && (
+                <Text style={styles.errorPrompt}>{props.errors.phoneNumber}</Text>
+              )}
+                <TextInput
+                  placeholder="Enter password"
+                  placeholderTextColor="#C4C4C4"
                   style={styles.textInput3}
+                  value={props.values.password}
+                onChangeText={props.handleChange('password')}
+                onSubmitEditing={() => props.setFieldTouched('password')}
                 />
-                <TextInput
-                  placeholder="Choose currency"
-                  placeholderTextColor="#C4C4C4"
-                  style={styles.textInput4}
-                />
-                <Text>Receiver's</Text>
-                <TextInput
-                  placeholder="Choose currency"
-                  placeholderTextColor="#C4C4C4"
-                  style={styles.textInput5}
-                />
-                <TextInput
-                  placeholder="Amount to be received"
-                  placeholderTextColor="#C4C4C4"
-                  style={styles.textInput6}
-                />
+                {props.errors.password && (
+                <Text style={styles.errorPrompt}>{props.errors.password}</Text>
+              )}
+              <TouchableOpacity
+            style={styles.buttonStyle}
+            onPress={props.handleSubmit}
+            disabled={sendWalletHook.isLoading}
+          >
+            <Text style={styles.buttonText}>{!sendWalletHook.isLoading ? 'Send Money' : 'Loading...'}</Text>
+          </TouchableOpacity>
+          {sendWalletHook.error && (
+            <Text style={styles.errorPrompt}>
+              {sendWalletHook?.error?.data?.error || 'Could not make request'}
+            </Text>
+          )}
+          {sendWalletHook.successResponse && sendWalletHook.successResponse.message && (
+            <Text style={styles.successPrompt}>
+              {sendWalletHook?.successResponse?.message || 'Could not make request'}
+            </Text>
+          )}
               </Fragment>
+              )
+            }}
             </Formik>
           </View>
           <View style={styles.header}>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               style={styles.buttonStyle}
               onPress={() =>
-                navigation.dispatch(StackActions.replace("DashboardScreen"))
+                navigation.navigate("DashboardScreen")
               }
             >
               <Text style={styles.buttonText}>Continue</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
           </View>
         </View>
       </SafeAreaView>
@@ -125,7 +159,7 @@ export const styles = StyleSheet.create({
         borderColor: "white",
         borderRadius: 12,
         padding: 14,
-        color: "#fff",
+        color: "black",
         backgroundColor: "white",
         marginBottom: 10
       },
@@ -134,7 +168,7 @@ export const styles = StyleSheet.create({
         borderColor: "white",
         borderRadius: 12,
         padding: 14,
-        color: "#fff",
+        color: "black",
         backgroundColor: "white",
         marginBottom: 10
       },
@@ -143,7 +177,7 @@ export const styles = StyleSheet.create({
         borderColor: "white",
         borderRadius: 12,
         padding: 14,
-        color: "#fff",
+        color: "black",
         backgroundColor: "white",
         marginBottom: 10
       },
@@ -152,7 +186,7 @@ export const styles = StyleSheet.create({
         borderColor: "white",
         borderRadius: 12,
         padding: 14,
-        color: "#fff",
+        color: "black",
         backgroundColor: "white",
         marginBottom: 10
       },
@@ -206,4 +240,12 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         color: "#FF9B00",
       },
+      errorPrompt: {
+        padding: 14,
+        color: '#ff2a00',
+      },
+      successPrompt: {
+        padding: 14,
+        color: 'green',
+      }
 });
